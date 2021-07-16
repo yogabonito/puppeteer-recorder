@@ -47,6 +47,7 @@ module.exports.record = async function(options) {
   ffmpeg.stdin.end();
 
   await closed;
+  await browser.close();
 };
 
 const ffmpegArgs = fps => [
@@ -58,13 +59,9 @@ const ffmpegArgs = fps => [
   '-i',
   '-',
   '-c:v',
-  'libvpx',
-  '-auto-alt-ref',
-  '0',
+  'libx264',
   '-pix_fmt',
   'yuva420p',
-  '-metadata:s:v:0',
-  'alpha_mode="1"'
 ];
 
 const write = (stream, buffer) =>
